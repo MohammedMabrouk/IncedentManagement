@@ -3,6 +3,7 @@ package com.example.incidentmanagement.data.di
 import android.util.Log
 import com.example.incidentmanagement.data.remote.Constants.BASE_URL
 import com.example.incidentmanagement.data.remote.IncidentsApi
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,10 +14,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+
 @Module
 @InstallIn(SingletonComponent::class)
 object RemoteModule {
-    private const val TAG = "API-LOGS"
+    private const val TAG = "API_LOGS"
 
     @Provides
     @Singleton
@@ -33,10 +35,14 @@ object RemoteModule {
     @Provides
     @Singleton
     fun provideIncidentsApi(okHttpClient: OkHttpClient): IncidentsApi {
+        val gson = GsonBuilder()
+            .setLenient()
+            .create()
+
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(IncidentsApi::class.java)
     }

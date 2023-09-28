@@ -94,6 +94,7 @@ dependencies {
     implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
     kapt("androidx.hilt:hilt-compiler:1.0.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    kapt("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.5.0")
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
